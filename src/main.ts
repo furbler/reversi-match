@@ -28,6 +28,7 @@ window.isKeyDown = {};
     //石のインスタンス
     let stones: Stones = null;
 
+
     //ページのロードが完了したときに発火する load イベント
     window.addEventListener('load', () => {
         // ユーティリティクラスを初期化
@@ -44,14 +45,14 @@ window.isKeyDown = {};
         stones = new Stones(util, GRID_NUM, grid_size);
 
         // イベントを設定する
-        eventSetting();
+        eventsetting();
         //ループ処理
         update();
     }, false);
 
 
     //イベントを設定する
-    function eventSetting() {
+    function eventsetting() {
         // キーの押下時に呼び出されるイベントリスナーを設定する
         window.addEventListener('keydown', (event) => {
             // キーの押下状態を管理するオブジェクトに押下されたことを設定する
@@ -59,7 +60,7 @@ window.isKeyDown = {};
             //スペースの場合
             if (event.key === ' ') {
                 // キーの押下状態を管理するオブジェクトに押下されたことを設定する
-                window.isKeyDown['key_Space'] = true;
+                window.isKeyDown['key_space'] = true;
                 console.log('スペースキー押されてるよ');
             }
         }, false);
@@ -71,7 +72,7 @@ window.isKeyDown = {};
             //スペースの場合
             if (event.key === ' ') {
                 // キーの押下状態を管理するオブジェクトに押下されたことを設定する
-                window.isKeyDown['key_Space'] = false;
+                window.isKeyDown['key_space'] = false;
             }
         }, false);
 
@@ -102,4 +103,6 @@ window.isKeyDown = {};
         // 恒常ループのために描画処理を再帰呼出しする
         mainRequestID = requestAnimationFrame(update);
     }
+
+
 })();
