@@ -8,7 +8,7 @@ export class Canvas2DUtility {
      * @constructor
      * @param {HTMLCanvasElement} canvas - 対象となる canvas element
      */
-    constructor(canvas: HTMLCanvasElement){
+    constructor(canvas: HTMLCanvasElement) {
         this.canvasElement = canvas;
         this.context2d = canvas.getContext('2d');
     }
@@ -16,11 +16,11 @@ export class Canvas2DUtility {
     /**
      * @return {HTMLCanvasElement}
      */
-    get canvas(){return this.canvasElement;}
+    get canvas() { return this.canvasElement; }
     /**
      * @return {CanvasRenderingContext2D}
      */
-    get context(){return this.context2d;}
+    get context() { return this.context2d; }
 
     /**
      * 矩形を描画する
@@ -30,9 +30,9 @@ export class Canvas2DUtility {
      * @param {number} height - 塗りつぶす矩形の高さ
      * @param {string} [color] - 矩形を塗りつぶす際の色
      */
-    drawRect(x: number, y: number, width: number, height: number, color: string){
+    drawRect(x: number, y: number, width: number, height: number, color: string) {
         // 色が指定されている場合はスタイルを設定する
-        if(color != null){
+        if (color != null) {
             this.context2d.fillStyle = color;
         }
         this.context2d.fillRect(x, y, width, height);
@@ -48,9 +48,9 @@ export class Canvas2DUtility {
     //  * @param {number} [width=1] - 線幅
     //  * dash : trueで破線になる
     //  */
-    drawLine(x1: number, y1: number, x2: number, y2: number, color: string, width: number = 1){
+    drawLine(x1: number, y1: number, x2: number, y2: number, color: string, width: number = 1) {
         // 色が指定されている場合はスタイルを設定する
-        if(color != null){
+        if (color != null) {
             this.context2d.strokeStyle = color;
         }
         // 線幅を設定する
@@ -67,9 +67,9 @@ export class Canvas2DUtility {
         this.context2d.stroke();
     }
     //破線を描画
-    drawDashLine(x1: number, y1: number, x2: number, y2: number, color: string, width: number = 1){
+    drawDashLine(x1: number, y1: number, x2: number, y2: number, color: string, width: number = 1) {
         // 色が指定されている場合はスタイルを設定する
-        if(color != null){
+        if (color != null) {
             this.context2d.strokeStyle = color;
         }
         // 線幅を設定する
@@ -93,14 +93,14 @@ export class Canvas2DUtility {
      * @param {Array<number>} points - 多角形の各頂点の座標
      * @param {string} [color] - 多角形を描画する際の色
      */
-    drawPolygon(points, color){
+    drawPolygon(points, color) {
         // points が配列であるかどうか確認し、多角形を描くために
         // 十分な個数のデータが存在するか調べる
-        if(Array.isArray(points) !== true || points.length < 6){
+        if (Array.isArray(points) !== true || points.length < 6) {
             return;
         }
         // 色が指定されている場合はスタイルを設定する
-        if(color != null){
+        if (color != null) {
             this.context2d.fillStyle = color;
         }
         // パスの設定を開始することを明示する
@@ -108,7 +108,7 @@ export class Canvas2DUtility {
         // パスの始点を設定する
         this.context2d.moveTo(points[0], points[1]);
         // 各頂点を結ぶパスを設定する
-        for(let i = 2; i < points.length; i += 2){
+        for (let i = 2; i < points.length; i += 2) {
             this.context2d.lineTo(points[i], points[i + 1]);
         }
         // パスを閉じることを明示する
@@ -145,13 +145,6 @@ export class Canvas2DUtility {
             if (color != null) this.context2d.strokeStyle = color;
             this.context2d.stroke();
         }
-
-            // if (color != null) this.context2d.fillStyle = "blue";
-            // this.context2d.fill();
-            // //図形内部を塗りつぶさない
-            // // 色が指定されている場合はスタイルを設定する
-            // if (color != null) this.context2d.strokeStyle = color;
-            // this.context2d.stroke();
     }
 
     /**
@@ -163,9 +156,9 @@ export class Canvas2DUtility {
      * @param {number} endRadian - 扇形の終了角
      * @param {string} [color] - 扇形を描画する際の色
      */
-    drawFan(x, y, radius, startRadian, endRadian, color){
+    drawFan(x, y, radius, startRadian, endRadian, color) {
         // 色が指定されている場合はスタイルを設定する
-        if(color != null){
+        if (color != null) {
             this.context2d.fillStyle = color;
         }
         // パスの設定を開始することを明示する
@@ -191,9 +184,9 @@ export class Canvas2DUtility {
      * @param {string} [color] - 線を描画する際の色
      * @param {number} [width=1] - 線幅
      */
-    drawQuadraticBezier(x1, y1, x2, y2, cx, cy, color, width = 1){
+    drawQuadraticBezier(x1, y1, x2, y2, cx, cy, color, width = 1) {
         // 色が指定されている場合はスタイルを設定する
-        if(color != null){
+        if (color != null) {
             this.context2d.strokeStyle = color;
         }
         // 線幅を設定する
@@ -223,9 +216,9 @@ export class Canvas2DUtility {
      * @param {string} [color] - 線を描画する際の色
      * @param {number} [width=1] - 線幅
      */
-    drawCubicBezier(x1, y1, x2, y2, cx1, cy1, cx2, cy2, color, width = 1){
+    drawCubicBezier(x1, y1, x2, y2, cx1, cy1, cx2, cy2, color, width = 1) {
         // 色が指定されている場合はスタイルを設定する
-        if(color != null){
+        if (color != null) {
             this.context2d.strokeStyle = color;
         }
         // 線幅を設定する
@@ -250,14 +243,14 @@ export class Canvas2DUtility {
      * @param {string} [color] - テキストを描画する際の色
      * @param {number} [width] - テキストを描画する幅に上限を設定する際の上限値(オプション)
      */
-    drawText(text: string, x: number, y: number, color: string, width: number = 0){
+    drawText(text: string, x: number, y: number, color: string, width: number = 0) {
         // 色が指定されている場合はスタイルを設定する
-        if(color != null){
+        if (color != null) {
             this.context2d.fillStyle = color;
         }
-        if(width === 0){
+        if (width === 0) {
             this.context2d.fillText(text, x, y);
-        }else {
+        } else {
             this.context2d.fillText(text, x, y, width);
         }
     }
@@ -267,13 +260,13 @@ export class Canvas2DUtility {
      * @param {string} path - 画像ファイルのパス
      * @param {function} [callback] - コールバック関数
      */
-    imageLoader(path, callback){
+    imageLoader(path, callback) {
         // 画像のインスタンスを生成する
         let target = new Image();
         // 画像がロード完了したときの処理を先に記述する
         target.addEventListener('load', () => {
             // もしコールバックがあれば呼び出す
-            if(callback != null){
+            if (callback != null) {
                 // コールバック関数の引数に画像を渡す
                 callback(target);
             }

@@ -1,8 +1,19 @@
 import { Canvas2DUtility } from "./canvas2d"
+import { Stones } from "./stones"
+
 //キーの押下状態を調べるためのオブジェクト
 window.isKeyDown = {};
 
 (() => {
+    //Canvas2D API をラップしたユーティリティクラス
+    let util: Canvas2DUtility = null;
+    //描画対象となる Canvas Element
+    let canvas: HTMLCanvasElement = null;
+    //Canvas2D API のコンテキスト
+    let ctx: CanvasRenderingContext2D = null;
+
+    let mainRequestID: number = null;
+
     //canvas の幅
     const CANVAS_WIDTH = 400;
     //canvas の高さ
@@ -13,18 +24,9 @@ window.isKeyDown = {};
     //マス目1つのpixelサイズ
     let grid_size = CANVAS_HEIGHT / GRID_NUM;
 
-    //石のpixelサイズ(半径)
-    //直径はマス目の80%の大きさとする
-    let stone_radius = grid_size * 0.8 * 0.5;
 
-    //Canvas2D API をラップしたユーティリティクラス
-    let util: Canvas2DUtility = null;
-    //描画対象となる Canvas Element
-    let canvas: HTMLCanvasElement = null;
-    //Canvas2D API のコンテキスト
-    let ctx: CanvasRenderingContext2D = null;
-
-    let mainRequestID: number = null;
+    //石のインスタンス
+    let stones: Stones = null;
 
     //ページのロードが完了したときに発火する load イベント
     window.addEventListener('load', () => {
@@ -37,6 +39,9 @@ window.isKeyDown = {};
         // canvas の大きさを設定
         canvas.width = CANVAS_WIDTH;
         canvas.height = CANVAS_HEIGHT;
+
+        //石のインスタンスを作成
+        stones = new Stones(util, GRID_NUM, grid_size);
 
         // イベントを設定する
         eventSetting();
@@ -89,8 +94,10 @@ window.isKeyDown = {};
         //ゲーム実行
         // グローバルなアルファを必ず 1.0 で描画処理を開始する
         ctx.globalAlpha = 1.0;
-
+        //盤を描画
         draw_board();
+        //石の処理
+        stones.update();
 
         // 恒常ループのために描画処理を再帰呼出しする
         mainRequestID = requestAnimationFrame(update);
