@@ -82,14 +82,27 @@ export class Stones {
     draw_stone(x: number, y: number, status: number, on_cursor: boolean) {
         //カーソルがあれば周りを線で囲む
         if (on_cursor) {
-            this.util.drawRect(x * this.grid_size, y * this.grid_size, this.grid_size, this.grid_size, "red");
+            this.util.drawRectOutline(x * this.grid_size, y * this.grid_size, this.grid_size, this.grid_size, "red");
         }
 
         //石が置かれていなければ何もしない
         if (status == 0) return;
 
+        //現在の影設定を保存
+        let pre_shadowColor = this.util.context2d.shadowColor;
+        let pre_shadowOffsetX = this.util.context2d.shadowOffsetX;
+        let pre_shadowOffsetY = this.util.context2d.shadowOffsetY;
+        //影設定を変更
+        this.util.context2d.shadowColor = "black";
+        this.util.context2d.shadowOffsetX = 2;
+        this.util.context2d.shadowOffsetY = 2;
+
         let color = status > 0 ? "black" : "white";
         this.util.drawCircle((0.5 + x) * this.grid_size, (0.5 + y) * this.grid_size, this.stone_radius, color);
+        //影設定を復元
+        this.util.context2d.shadowColor = pre_shadowColor;
+        this.util.context2d.shadowOffsetX = pre_shadowOffsetX;
+        this.util.context2d.shadowOffsetY = pre_shadowOffsetY;
     }
 }
 

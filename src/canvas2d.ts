@@ -23,14 +23,14 @@ export class Canvas2DUtility {
     get context() { return this.context2d; }
 
     /**
-     * 矩形を描画する
+     * 矩形を塗りつぶして描画する
      * @param {number} x - 塗りつぶす矩形の左上角の X 座標
      * @param {number} y - 塗りつぶす矩形の左上角の Y 座標
      * @param {number} width - 塗りつぶす矩形の横幅
      * @param {number} height - 塗りつぶす矩形の高さ
      * @param {string} [color] - 矩形を塗りつぶす際の色
      */
-    drawRect(x: number, y: number, width: number, height: number, color: string) {
+    drawFillRect(x: number, y: number, width: number, height: number, color: string) {
         // 色が指定されている場合はスタイルを設定する
         if (color != null) {
             this.context2d.fillStyle = color;
@@ -38,16 +38,23 @@ export class Canvas2DUtility {
         this.context2d.fillRect(x, y, width, height);
     }
 
-    // /**
-    //  * 線分を描画する
-    //  * @param {number} x1 - 線分の始点の X 座標
-    //  * @param {number} y1 - 線分の始点の Y 座標
-    //  * @param {number} x2 - 線分の終点の X 座標
-    //  * @param {number} y2 - 線分の終点の Y 座標
-    //  * @param {string} [color] - 線を描画する際の色
-    //  * @param {number} [width=1] - 線幅
-    //  * dash : trueで破線になる
-    //  */
+    //矩形の輪郭を描画する
+    drawRectOutline(x: number, y: number, width: number, height: number, color: string) {
+        this.context.lineWidth = 5;
+        this.context.strokeStyle = color;
+        this.context2d.strokeRect(x, y, width, height);
+    }
+
+    /**
+     * 線分を描画する
+     * @param {number} x1 - 線分の始点の X 座標
+     * @param {number} y1 - 線分の始点の Y 座標
+     * @param {number} x2 - 線分の終点の X 座標
+     * @param {number} y2 - 線分の終点の Y 座標
+     * @param {string} [color] - 線を描画する際の色
+     * @param {number} [width=1] - 線幅
+     * dash : trueで破線になる
+     */
     drawLine(x1: number, y1: number, x2: number, y2: number, color: string, width: number = 1) {
         // 色が指定されている場合はスタイルを設定する
         if (color != null) {

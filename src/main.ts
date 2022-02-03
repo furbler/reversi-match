@@ -81,7 +81,7 @@ window.isKeyDown = {};
     //盤面を描画
     function draw_board() {
         // 画面を背景色で塗りつぶす
-        util.drawRect(0, 0, canvas.width, canvas.height, '#99ee99');
+        util.drawFillRect(0, 0, canvas.width, canvas.height, '#99ee99');
 
         //盤面の線を描画
         for (let i = 0; i <= GRID_NUM; i++) {
